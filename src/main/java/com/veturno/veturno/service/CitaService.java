@@ -22,4 +22,21 @@ public class CitaService {
     public Cita guardar(Cita cita) {
         return citaRepository.save(cita);
     }
+
+    public Cita actualizar(Long id, Cita citaActualizada) {
+
+        Cita cita = citaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cita no encontrada"));
+
+        cita.setFechaHora(citaActualizada.getFechaHora());
+        cita.setMotivo(citaActualizada.getMotivo());
+        cita.setMascota(citaActualizada.getMascota());
+        cita.setVeterinario(citaActualizada.getVeterinario());
+
+        return citaRepository.save(cita);
+    }
+
+    public void eliminar(Long id) {
+        citaRepository.deleteById(id);
+    }
 }

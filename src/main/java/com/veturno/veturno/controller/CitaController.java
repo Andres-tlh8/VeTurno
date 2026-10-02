@@ -16,13 +16,24 @@ public class CitaController {
         this.citaService = citaService;
     }
 
-    @GetMapping
+        @GetMapping
     public List<Cita> listarTodos() {
         return citaService.listarTodos();
     }
 
-    @PostMapping
+        @PostMapping
     public Cita guardar(@RequestBody Cita cita) {
         return citaService.guardar(cita);
+    }
+
+    @PutMapping("/{id}")
+    public Cita actualizar(@PathVariable Long id,
+                            @RequestBody Cita cita) {
+        return citaService.actualizar(id, cita);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        citaService.eliminar(id);
     }
 }
