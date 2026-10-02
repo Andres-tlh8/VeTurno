@@ -1,0 +1,8 @@
+PUT http://localhost:8080/propietarios/1
+Content-Type: application/json
+
+{
+"nombre": "Andres Felipe Perez",
+"telefono": "3115556677",
+"correo": "andresfelipe@gmail.com"
+}
