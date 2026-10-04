@@ -42,4 +42,8 @@ public class HistorialClinicoService {
     public void eliminar(Long id) {
         historialClinicoRepository.deleteById(id);
     }
+
+    public List<HistorialClinico> buscarPorMascota(Long mascotaId) {
+        return historialClinicoRepository.findByMascotaId(mascotaId);
+    }
 }

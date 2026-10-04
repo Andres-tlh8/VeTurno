@@ -1,31 +1,17 @@
-package com.veturno.veturno.model;
+package com.veturno.veturno.dto;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "citas")
-public class Cita {
+public class CitaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private LocalDateTime fechaHora;
-
     private String motivo;
-
     private String estado;
+    private String mascota;
+    private String veterinario;
 
-    @ManyToOne
-    @JoinColumn(name = "mascota_id")
-    private Mascota mascota;
-
-    @ManyToOne
-    @JoinColumn(name = "veterinario_id")
-    private Veterinario veterinario;
-
-    public Cita() {
+    public CitaDTO() {
     }
 
     public Long getId() {
@@ -60,19 +46,19 @@ public class Cita {
         this.estado = estado;
     }
 
-    public Mascota getMascota() {
+    public String getMascota() {
         return mascota;
     }
 
-    public void setMascota(Mascota mascota) {
+    public void setMascota(String mascota) {
         this.mascota = mascota;
     }
 
-    public Veterinario getVeterinario() {
+    public String getVeterinario() {
         return veterinario;
     }
 
-    public void setVeterinario(Veterinario veterinario) {
+    public void setVeterinario(String veterinario) {
         this.veterinario = veterinario;
     }
 }

@@ -4,6 +4,8 @@ import com.veturno.veturno.model.Cita;
 import com.veturno.veturno.repository.CitaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,6 +32,7 @@ public class CitaService {
 
         cita.setFechaHora(citaActualizada.getFechaHora());
         cita.setMotivo(citaActualizada.getMotivo());
+        cita.setEstado(citaActualizada.getEstado());
         cita.setMascota(citaActualizada.getMascota());
         cita.setVeterinario(citaActualizada.getVeterinario());
 
@@ -38,5 +41,40 @@ public class CitaService {
 
     public void eliminar(Long id) {
         citaRepository.deleteById(id);
+    }
+
+    public List<Cita> buscarPorEstado(String estado) {
+        return citaRepository.findByEstado(estado);
+    }
+
+    public List<Cita> buscarPorMascota(Long mascotaId) {
+        return citaRepository.findByMascotaId(mascotaId);
+    }
+
+    public List<Cita> buscarPorVeterinario(Long veterinarioId) {
+        return citaRepository.findByVeterinarioId(veterinarioId);
+    }
+
+    public List<Cita> buscarPorFecha(LocalDate fecha) {
+
+        LocalDateTime inicio = fecha.atStartOfDay();
+        LocalDateTime fin = fecha.atTime(23, 59, 59);
+
+        return citaRepository.findByFechaHoraBetween(
+                inicio,
+                fin);
+    }
+
+    public List<Cita> buscarPorRango(
+            LocalDate inicio,
+            LocalDate fin) {
+
+        LocalDateTime fechaInicio = inicio.atStartOfDay();
+
+        LocalDateTime fechaFin = fin.atTime(23, 59, 59);
+
+        return citaRepository.findByFechaHoraBetween(
+                fechaInicio,
+                fechaFin);
     }
 }

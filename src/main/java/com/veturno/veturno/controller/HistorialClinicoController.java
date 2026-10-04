@@ -16,7 +16,7 @@ public class HistorialClinicoController {
         this.historialClinicoService = historialClinicoService;
     }
 
-@GetMapping
+    @GetMapping
     public List<HistorialClinico> listarTodos() {
         return historialClinicoService.listarTodos();
     }
@@ -27,12 +27,18 @@ public class HistorialClinicoController {
     }
 
     @PutMapping("/{id}")
-    public HistorialClinico actualizar(@PathVariable Long id, @RequestBody HistorialClinico historialClinico) {
+    public HistorialClinico actualizar(@PathVariable Long id,
+                                       @RequestBody HistorialClinico historialClinico) {
         return historialClinicoService.actualizar(id, historialClinico);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         historialClinicoService.eliminar(id);
+    }
+
+    @GetMapping("/mascota/{id}")
+    public List<HistorialClinico> buscarPorMascota(@PathVariable Long id) {
+        return historialClinicoService.buscarPorMascota(id);
     }
 }
